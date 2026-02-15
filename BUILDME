@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+. .builder
+
+npm install
+
+mkdir -p target/
+
+for dir in source/*.*/; do
+  
+  dir="${dir%/}"
+  
+  path="${dir#source/}"
+  path="${path%.*}"
+  path="${path//.//}"
+  
+  name="${dir##*.}"
+
+  build_js "$dir/$name.js" "target/$path/$name.js"
+done
+
+echo -e "\nDone"
