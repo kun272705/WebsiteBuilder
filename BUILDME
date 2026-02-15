@@ -16,13 +16,13 @@ for dir in source/*.*/; do
   
   dir="${dir%/}"
   
-  path="${dir#source/}"
-  path="${path%.*}"
-  path="${path//.//}"
+  dir2="${dir#source/}"
+  dir2="${dir2%.*}"
+  dir2="${dir2//.//}"
   
   name="${dir##*.}"
 
-  build_js "$dir/$name.js" "target/$path/$name.js"
+  build_js "$dir/$name.js" "target/$dir2/$name.js"
 done
 
 echo -e "\nDone"
