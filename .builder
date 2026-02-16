@@ -20,6 +20,14 @@ build_html() {
   if [ -f "$input" ]; then
     
     echo -e "\n'$input' -> '$output'"
+
+    if [[ ${NODE_ENV:="production"} == "development" ]]; then
+
+      npx ejs "$input" -o "$output"
+    else
+
+      npx ejs "$input" -o "$output" -w
+    if
   fi
 }
 
