@@ -9,8 +9,6 @@ npm install
 
 mkdir -p target/
 
-mkdir -p target/pub/
-
 if [ -d source/pub.favicon/ ]; then
 
   for entry in source/pub.favicon/*; do
@@ -18,8 +16,6 @@ if [ -d source/pub.favicon/ ]; then
     copy_entry "$entry" "target/pub/${entry#source/pub.favicon/}"
   done
 fi
-
-mkdir -p target/pub/lib/
 
 for dir in source/pub.lib.*/; do
 
