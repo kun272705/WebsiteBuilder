@@ -27,7 +27,7 @@ build_html() {
     else
 
       npx ejs "$input" -o "$output" -w
-    if
+    fi
   fi
 }
 
@@ -59,7 +59,7 @@ build_js() {
 
     echo -e "\n'$input' -> '$output'"
 
-    npx rollup -c -i "$input" -o "${output/%.js/.combined.js}" --failAfterWarnings
+    npx rollup -c -i "$input" -o "${output/%.js/.combined.js}" -f iife --failAfterWarnings
 
     npx swc "${output/%.js/.combined.js}" -o "${output/%.js/.transpiled.js}"
     
