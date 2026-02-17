@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-IFS=$'\n\t'
 
-. .builder
+source .builder.sh
 
 npm install
 
@@ -21,7 +20,7 @@ for dir in source/pub.lib.*/; do
 
   for entry in "${dir}"*; do
 
-    copy_entry "$entry" "target/pub/lib/${entry#${dir}}"
+    copy_entry "$entry" "target/pub/lib/${entry#"${dir}"}"
   done
 done
 
