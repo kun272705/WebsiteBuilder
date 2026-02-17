@@ -8,11 +8,11 @@ npm install
 
 mkdir -p tgt/
 
-if [ -d src/pub.favicon/ ]; then
+if [ -d src/pub.res/ ]; then
 
-  for entry in src/pub.favicon/*; do
+  for entry in src/pub.res/*; do
 
-    copy_entry "$entry" "tgt/pub/${entry#src/pub.favicon/}" 
+    copy_entry "$entry" "tgt/pub/${entry#src/pub.res/}"
   done
 fi
 
@@ -34,13 +34,15 @@ for dir in src/pub.*/; do
   dir2="${dir2%.*}"
   dir2="${dir2//.//}"
   
-  if [ -f "$dir/$name.html" ]; then
+  if [ -f "$dir/$name.java" ]; then
 
     build_html "$dir/$name.html" "tgt/$dir2/$name.html"
 
     build_css "$dir/$name.css" "tgt/$dir2/$name.css"
 
     build_js "$dir/$name.js" "tgt/$dir2/$name.js"
+
+    build_java "$dir/$name.java" "tgt/$dir2/$name.jar"
   fi
 done
 
