@@ -7,7 +7,7 @@ copy_item() {
   local src="$1"
   local dst="$2"
 
-  if [ -e "$src" ]; then
+  if [ -f "$src" ]; then
 
     echo -e "\n'$src' -> '$dst'"
 
