@@ -25,7 +25,7 @@ mvn dependency:copy-dependencies -DoutputDirectory=tgt/lib/ -DincludeScope=runti
 for dir in src/pub/*/; do
  
   item="${dir/src/tgt}"
-  item="${item//./\/}"
+  item="${item//.//}"
   item="${item%/}"
 
   name="${item##*/}"
