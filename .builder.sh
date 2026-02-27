@@ -31,13 +31,19 @@ build_jar() {
 
     mkdir -p "${outdir}classes/"
 
-    javac -cp "java_packages/*" "${input/%Handler.java/*.java}" -d "${outdir}classes/"
+    if [[ "${MODE:-production}" == development ]]; then
+
+      javac -cp "java_packages/*" "${input/%Handler.java/*.java}" -d "${outdir}classes/" -g
+    else
+
+      javac -cp "java_packages/*" "${input/%Handler.java/*.java}" -d "${outdir}classes/"
+    fi
 
     local args=("-C" "${outdir}classes/" "./")
 
     if [ -f "${input/%Handler.java/template.html}" ]; then
 
-      if [[ "${NODE_ENV:-production}" == development ]]; then
+      if [[ "${MODE:-production}" == development ]]; then
 
         npx ejs "${input/%Handler.java/template.html}" -o "${outdir}template.html"
       else
@@ -69,7 +75,7 @@ build_css() {
     
     echo -e "\n'$input' -> '$output'"
 
-    if [[ "${NODE_ENV:-production}" == development ]]; then
+    if [[ "${MODE:-production}" == development ]]; then
 
       npx lightningcss "$input" -o "$output" --bundle --browserslist
     else
@@ -92,7 +98,7 @@ build_js() {
 
     npx swc "${output/%.js/.combined.js}" -o "${output/%.js/.transpiled.js}"
 
-    if [[ "${NODE_ENV:-production}" == development ]]; then
+    if [[ "${MODE:-production}" == development ]]; then
 
       cp "${output/%.js/.transpiled.js}" "$output"
     else
